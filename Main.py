@@ -45,6 +45,34 @@ def startup_inventory():
             print("Error:", e)
             print("Please try again.")
 
+# ----------------------------------------------------
+# Main Menu Loop
+# ----------------------------------------------------
+
 def main():
-    print("Bob’s Ski & Snowboard Rentals")
+    inventory = startup_inventory()
+    active_rentals = {}
+
+    while True:
+        print("--------------------------------------------------")
+        print("Main Menu")
+        print("--------------------------------------------------")
+        print("1. New Customer Rental")
+        print("2. Rental Return")
+        print("3. Show Inventory")
+        print("4. End of Day")
+
+        choice = get_nonempty_string("Select an option: ")
+
+        if choice == "1":
+            new_rental(inventory, active_rentals)
+        elif choice == "2":
+            rental_return(inventory, active_rentals)
+        elif choice == "3":
+            show_inventory(inventory)
+        elif choice == "4":
+            end_of_day()
+        else:
+            print("Invalid selection. Please try again.")
+
 main()
