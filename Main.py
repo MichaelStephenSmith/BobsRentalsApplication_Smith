@@ -115,6 +115,51 @@ def new_rental(inventory, active_rentals):
 
     print("Rental completed successfully!")
 
+# ----------------------------------------------------
+# Rental Return Workflow
+# ----------------------------------------------------
+
+def rental_return(inventory, active_rentals):
+    print("--------------------------------------------------")
+    print("Rental Return")
+    print("--------------------------------------------------")
+
+    id_number = get_int("Enter customer ID number: ")
+
+    if id_number not in active_rentals:
+        print("No active rental found for that ID.")
+        return
+
+    record = active_rentals[id_number]
+
+    actual_length = get_int("Enter actual rental length: ")
+
+    # Create Return object
+    try:
+        return_obj = Return(
+            inventory,
+            record["snowboards"],
+            record["skis"],
+            record["period"],
+            record["estimated_length"],
+            actual_length,
+            record["coupon"]
+        )
+    except Exception as e:
+        print("Error:", e)
+        return
+
+    # Display final cost
+    return_obj.Display_Actual_Cost()
+
+    # Restore inventory
+    return_obj.Add_To_Inventory()
+
+    # Remove from active rentals
+    del active_rentals[id_number]
+
+    print("Return completed successfully!")
+
 
 # ----------------------------------------------------
 # Main Menu Loop
