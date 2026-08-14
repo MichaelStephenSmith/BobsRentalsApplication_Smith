@@ -162,6 +162,28 @@ def rental_return(inventory, active_rentals):
 
 
 # ----------------------------------------------------
+# Show Inventory
+# ----------------------------------------------------
+
+def show_inventory(inventory):
+    inventory.Show_Inventory()
+
+
+# ----------------------------------------------------
+# End of Day
+# ----------------------------------------------------
+
+def end_of_day():
+    print("--------------------------------------------------")
+    print("End of Day Summary:")
+    print("--------------------------------------------------")
+    Daily.Display_Daily()
+    print("Thank you for using Bob’s Ski & Snowboard Rentals!")
+    exit()
+
+
+
+# ----------------------------------------------------
 # Main Menu Loop
 # ----------------------------------------------------
 
