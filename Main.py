@@ -45,6 +45,77 @@ def startup_inventory():
             print("Error:", e)
             print("Please try again.")
 
+
+# ----------------------------------------------------
+# New Customer Rental Workflow
+# ----------------------------------------------------
+
+def new_rental(inventory, active_rentals):
+    print("--------------------------------------------------")
+    print("New Customer Rental")
+    print("--------------------------------------------------")
+
+    # Collect rental details
+    num_snowboards = get_int("Number of snowboards to rent: ")
+    num_skis = get_int("Number of skis to rent: ")
+
+    rental_period = get_nonempty_string("Rental period (Hour/Day/Week): ")
+    estimated_length = get_int("Estimated rental length: ")
+
+    coupon = input("Enter coupon code (or press Enter to skip): ").strip()
+
+    # Validate using EquipmentChoice_RentalPeriod
+    try:
+        EquipmentChoice_RentalPeriod(
+            inventory,
+            num_snowboards,
+            num_skis,
+            rental_period,
+            estimated_length
+        )
+    except Exception as e:
+        print("Error:", e)
+        return
+
+    # Create Rental object
+    rental_obj = Rental(inventory, num_snowboards, num_skis, rental_period, estimated_length)
+
+    # Display estimate
+    rental_obj.Display_Estimate()
+
+    # Ask customer to confirm
+    confirm = input("Complete this rental? (Y/N): ").strip().upper()
+    if confirm != "Y":
+        print("Rental cancelled.")
+        return
+
+    # Collect customer info
+    name = get_nonempty_string("Customer name: ")
+    id_number = get_int("Customer ID number: ")
+
+    customer = Customer_Information(name, id_number)
+
+    # Remove inventory
+    try:
+        rental_obj.Remove_From_Inventory()
+    except Exception as e:
+        print("Error:", e)
+        return
+
+    # Store active rental
+    active_rentals[id_number] = {
+        "customer": customer,
+        "rental": rental_obj,
+        "snowboards": num_snowboards,
+        "skis": num_skis,
+        "period": rental_period,
+        "estimated_length": estimated_length,
+        "coupon": coupon
+    }
+
+    print("Rental completed successfully!")
+
+
 # ----------------------------------------------------
 # Main Menu Loop
 # ----------------------------------------------------
