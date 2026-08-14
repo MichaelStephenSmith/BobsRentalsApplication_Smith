@@ -1,5 +1,5 @@
 # ----------------------------------------------------
-# Bob’s Ski & Snowboard Rentals - Application (Part 2)
+# Bobs Ski & Snowboard Rentals - Application (Part 2)
 # ----------------------------------------------------
 
 from Inventory import Inventory
@@ -32,7 +32,7 @@ def get_nonempty_string(prompt):
 # ----------------------------------------------------
 
 def startup_inventory():
-    print("Welcome to Bob’s Ski & Snowboard Rentals!")
+    print("Welcome to Bobs Ski & Snowboard Rentals!")
     print("Enter starting inventory.")
 
     while True:
@@ -178,9 +178,8 @@ def end_of_day():
     print("End of Day Summary:")
     print("--------------------------------------------------")
     Daily.Display_Daily()
-    print("Thank you for using Bob’s Ski & Snowboard Rentals!")
+    print("Thank you for using Bobs Ski & Snowboard Rentals!")
     exit()
-
 
 
 # ----------------------------------------------------
